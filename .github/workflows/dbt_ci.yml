@@ -1,0 +1,79 @@
+name: dbt CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  dbt-ci:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: hr_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-dbt-postgres
+          restore-keys: ${{ runner.os }}-pip-
+
+      - name: Install dbt-postgres
+        run: pip install dbt-postgres
+
+      - name: Create dbt profiles.yml
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml << 'EOF'
+          hr_dbt:
+            target: dev
+            outputs:
+              dev:
+                type: postgres
+                host: localhost
+                port: 5432
+                user: postgres
+                password: postgres
+                dbname: hr_db
+                schema: public
+                threads: 4
+          EOF
+
+      - name: dbt debug
+        working-directory: hr_dbt
+        run: dbt debug
+
+      - name: dbt seed (load CSV files into hr_db)
+        working-directory: hr_dbt
+        run: dbt seed
+
+      - name: dbt run (build all models)
+        working-directory: hr_dbt
+        run: dbt run
+
+      - name: dbt test (run all data quality tests)
+        working-directory: hr_dbt
+        run: dbt test
