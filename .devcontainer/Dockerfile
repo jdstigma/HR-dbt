@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/devcontainers/python:3.11
 
 # Install PostgreSQL at build time
 RUN apt-get update && \
-    apt-get install -y postgresql postgresql-contrib && \
+    apt-get install -y postgresql postgresql-contrib pandoc && \
     rm -rf /var/lib/apt/lists/*
 
 # Grant vscode user passwordless sudo
