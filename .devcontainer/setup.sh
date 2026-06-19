@@ -25,4 +25,8 @@ hr_dbt:
       threads: 4
 EOF
 
+echo "Initializing dbt project..."
+cd /workspaces/HR-dbt
+dbt init hr_dbt --skip-profile-setup
+
 echo "Setup complete. PostgreSQL is running on port 5432."
