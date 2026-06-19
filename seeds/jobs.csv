@@ -1,0 +1,51 @@
+job_id,job_title,job_family,level,min_salary,max_salary
+1,Junior Software Engineer,Engineering,Entry,65000,90000
+2,Software Engineer,Engineering,Mid,90000,130000
+3,Senior Software Engineer,Engineering,Senior,130000,175000
+4,Staff Engineer,Engineering,Lead,170000,220000
+5,Principal Engineer,Engineering,Principal,200000,280000
+6,Engineering Manager,Engineering,Manager,160000,220000
+7,VP of Engineering,Engineering,VP,220000,320000
+8,Data Analyst,Data,Mid,70000,100000
+9,Senior Data Analyst,Data,Senior,95000,130000
+10,Data Engineer,Data,Mid,95000,135000
+11,Senior Data Engineer,Data,Senior,130000,175000
+12,Data Scientist,Data,Mid,100000,145000
+13,ML Engineer,Data,Senior,135000,185000
+14,DevOps Engineer,Infrastructure,Mid,90000,130000
+15,Security Engineer,Security,Mid,100000,145000
+16,Product Manager,Product,Mid,110000,155000
+17,Senior Product Manager,Product,Senior,145000,195000
+18,Financial Analyst,Finance,Entry,60000,85000
+19,Senior Financial Analyst,Finance,Senior,85000,115000
+20,Finance Manager,Finance,Manager,110000,150000
+21,Controller,Finance,Director,150000,200000
+22,CFO,Finance,C-Suite,250000,400000
+23,HR Coordinator,HR,Entry,45000,65000
+24,HR Business Partner,HR,Mid,70000,100000
+25,Senior HRBP,HR,Senior,95000,130000
+26,Recruiter,HR,Mid,60000,90000
+27,HR Director,HR,Director,130000,175000
+28,CHRO,HR,C-Suite,220000,350000
+29,Operations Analyst,Operations,Entry,55000,75000
+30,Operations Manager,Operations,Manager,90000,125000
+31,Supply Chain Analyst,Operations,Mid,65000,90000
+32,Procurement Specialist,Operations,Mid,60000,85000
+33,COO,Operations,C-Suite,250000,400000
+34,Sales Development Rep,Sales,Entry,45000,65000
+35,Account Executive,Sales,Mid,70000,110000
+36,Senior Account Executive,Sales,Senior,100000,150000
+37,Sales Manager,Sales,Manager,120000,165000
+38,VP of Sales,Sales,VP,200000,300000
+39,Marketing Specialist,Marketing,Mid,60000,85000
+40,Marketing Manager,Marketing,Manager,90000,125000
+41,CMO,Marketing,C-Suite,220000,350000
+42,Paralegal,Legal,Entry,50000,75000
+43,Corporate Counsel,Legal,Mid,130000,180000
+44,General Counsel,Legal,Director,220000,320000
+45,Compliance Analyst,Compliance,Mid,65000,95000
+46,Research Scientist,Research,Mid,90000,130000
+47,Senior Research Scientist,Research,Senior,125000,175000
+48,Research Director,Research,Director,175000,240000
+49,Customer Success Manager,Customer Success,Mid,65000,95000
+50,Support Specialist,Customer Success,Entry,45000,65000
