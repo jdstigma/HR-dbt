@@ -29,4 +29,9 @@ echo "Initializing dbt project..."
 cd /workspaces/HR-dbt
 dbt init hr_dbt --skip-profile-setup
 
+echo "Configuring Jupyter..."
+jupyter notebook --generate-config
+echo "c.ServerApp.token = ''" >> ~/.jupyter/jupyter_notebook_config.py
+echo "c.ServerApp.password = ''" >> ~/.jupyter/jupyter_notebook_config.py
+
 echo "Setup complete. PostgreSQL is running on port 5432."
