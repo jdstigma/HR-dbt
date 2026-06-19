@@ -1,1 +1,8 @@
 dbt-postgres
+pandas
+sqlalchemy
+psycopg2-binary
+jupyter
+matplotlib
+seaborn
+scipy
