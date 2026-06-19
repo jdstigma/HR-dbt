@@ -1,0 +1,173 @@
+version: 2
+
+models:
+  - name: stg_employees
+    columns:
+      - name: employee_id
+        tests: [not_null, unique]
+      - name: email
+        tests: [not_null, unique]
+      - name: employment_status
+        tests:
+          - accepted_values:
+              values: ['Active', 'Terminated', 'On Leave']
+      - name: employment_type
+        tests:
+          - accepted_values:
+              values: ['Full-Time', 'Part-Time', 'Contract']
+      - name: gender
+        tests:
+          - accepted_values:
+              values: ['Male', 'Female', 'Non-Binary']
+      - name: salary
+        tests: [not_null]
+      - name: hire_date
+        tests: [not_null]
+      - name: department_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_departments')
+              field: department_id
+      - name: job_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_jobs')
+              field: job_id
+      - name: location_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_locations')
+              field: location_id
+
+  - name: stg_departments
+    columns:
+      - name: department_id
+        tests: [not_null, unique]
+      - name: department_name
+        tests: [not_null, unique]
+      - name: division_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_divisions')
+              field: division_id
+
+  - name: stg_divisions
+    columns:
+      - name: division_id
+        tests: [not_null, unique]
+      - name: division_name
+        tests: [not_null, unique]
+
+  - name: stg_jobs
+    columns:
+      - name: job_id
+        tests: [not_null, unique]
+      - name: job_title
+        tests: [not_null, unique]
+
+  - name: stg_locations
+    columns:
+      - name: location_id
+        tests: [not_null, unique]
+
+  - name: stg_payroll_history
+    columns:
+      - name: payroll_id
+        tests: [not_null, unique]
+      - name: employee_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_employees')
+              field: employee_id
+      - name: gross_pay
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: net_pay
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+  - name: stg_performance_reviews
+    columns:
+      - name: review_id
+        tests: [not_null, unique]
+      - name: employee_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_employees')
+              field: employee_id
+      - name: performance_score
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 1
+              max_value: 5
+
+  - name: stg_training_records
+    columns:
+      - name: training_id
+        tests: [not_null, unique]
+      - name: employee_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_employees')
+              field: employee_id
+      - name: passed
+        tests:
+          - accepted_values:
+              values: ['Yes', 'No']
+
+  - name: stg_attendance_summary
+    columns:
+      - name: attendance_id
+        tests: [not_null, unique]
+      - name: employee_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_employees')
+              field: employee_id
+      - name: attendance_rate_pct
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 100
+
+  - name: stg_benefits_enrollment
+    columns:
+      - name: enrollment_id
+        tests: [not_null, unique]
+      - name: employee_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_employees')
+              field: employee_id
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['Active', 'Inactive']
+
+  - name: stg_job_history
+    columns:
+      - name: history_id
+        tests: [not_null, unique]
+      - name: employee_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_employees')
+              field: employee_id
+      - name: salary
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0"

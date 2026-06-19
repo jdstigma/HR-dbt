@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: mart_employee_roster
+    columns:
+      - name: employee_id
+        tests: [not_null, unique]
+      - name: salary
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+      - name: salary_position_in_band_pct
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 100
+              inclusive: false
+
+  - name: mart_payroll_summary
+    columns:
+      - name: total_gross_pay
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+  - name: mart_attrition
+    columns:
+      - name: terminations
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+      - name: avg_tenure_at_exit_years
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
