@@ -29,6 +29,9 @@ echo "Initializing dbt project..."
 cd /workspaces/HR-dbt
 dbt init hr_dbt --skip-profile-setup
 
+echo "Installing Playwright Chromium for PDF export..."
+playwright install chromium
+
 echo "Configuring Jupyter..."
 jupyter notebook --generate-config
 echo "c.ServerApp.token = ''" >> ~/.jupyter/jupyter_notebook_config.py

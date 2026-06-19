@@ -6,3 +6,5 @@ jupyter
 matplotlib
 seaborn
 scipy
+nbconvert[webpdf]
+playwright
