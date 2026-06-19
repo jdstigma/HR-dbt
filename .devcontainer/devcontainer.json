@@ -1,6 +1,9 @@
 {
     "name": "HR dbt + PostgreSQL",
-    "image": "mcr.microsoft.com/devcontainers/python:3.11",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
     "postCreateCommand": "bash .devcontainer/setup.sh",
     "customizations": {
         "vscode": {

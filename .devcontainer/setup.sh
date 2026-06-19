@@ -1,19 +1,12 @@
 #!/bin/bash
 set -e
 
-echo "Installing PostgreSQL..."
-sudo apt-get update -qq
-sudo apt-get install -y postgresql postgresql-contrib
-
 echo "Starting PostgreSQL..."
 sudo service postgresql start
 
 echo "Creating hr_db and setting password..."
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 sudo -u postgres psql -c "CREATE DATABASE hr_db;"
-
-echo "Installing Python dependencies..."
-pip install -r requirements.txt
 
 echo "Creating dbt profiles.yml..."
 mkdir -p ~/.dbt
