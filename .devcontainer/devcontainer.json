@@ -1,13 +1,26 @@
 {
-    "name": "HR dbt + DuckDB",
+    "name": "HR dbt + PostgreSQL",
     "image": "mcr.microsoft.com/devcontainers/python:3.11",
-    "postCreateCommand": "pip install dbt-duckdb",
+    "features": {
+        "ghcr.io/devcontainers/features/postgres:1": {
+            "version": "14"
+        }
+    },
+    "postCreateCommand": "bash .devcontainer/setup.sh",
     "customizations": {
         "vscode": {
             "extensions": [
                 "innoverio.vscode-dbt-power-user",
-                "ms-python.python"
+                "ms-python.python",
+                "ms-ossdata.vscode-postgresql"
             ]
+        }
+    },
+    "forwardPorts": [5432],
+    "portsAttributes": {
+        "5432": {
+            "label": "PostgreSQL",
+            "onAutoForward": "notify"
         }
     }
 }
