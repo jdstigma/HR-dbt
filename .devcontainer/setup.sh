@@ -12,8 +12,8 @@ echo "Creating hr_db and setting password..."
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 sudo -u postgres psql -c "CREATE DATABASE hr_db;"
 
-echo "Installing dbt-postgres..."
-pip install dbt-postgres
+echo "Installing Python dependencies..."
+pip install -r requirements.txt
 
 echo "Creating dbt profiles.yml..."
 mkdir -p ~/.dbt

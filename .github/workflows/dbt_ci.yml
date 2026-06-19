@@ -41,8 +41,8 @@ jobs:
           key: ${{ runner.os }}-pip-dbt-postgres
           restore-keys: ${{ runner.os }}-pip-
 
-      - name: Install dbt-postgres
-        run: pip install dbt-postgres
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
       - name: Create dbt profiles.yml
         run: |
