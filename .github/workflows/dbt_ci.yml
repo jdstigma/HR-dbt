@@ -62,18 +62,20 @@ jobs:
                 threads: 4
           EOF
 
+      - name: Find dbt project directory
+        run: |
+          DBT_PROJECT_DIR=$(dirname $(find . -name "dbt_project.yml" | head -1))
+          echo "DBT_PROJECT_DIR=$DBT_PROJECT_DIR" >> $GITHUB_ENV
+          echo "Found dbt project at: $DBT_PROJECT_DIR"
+
       - name: dbt debug
-        working-directory: hr_dbt
-        run: dbt debug
+        run: dbt debug --project-dir $DBT_PROJECT_DIR
 
       - name: dbt seed (load CSV files into hr_db)
-        working-directory: hr_dbt
-        run: dbt seed
+        run: dbt seed --project-dir $DBT_PROJECT_DIR
 
       - name: dbt run (build all models)
-        working-directory: hr_dbt
-        run: dbt run
+        run: dbt run --project-dir $DBT_PROJECT_DIR
 
       - name: dbt test (run all data quality tests)
-        working-directory: hr_dbt
-        run: dbt test
+        run: dbt test --project-dir $DBT_PROJECT_DIR
