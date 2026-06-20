@@ -9,3 +9,4 @@ scipy
 nbconvert[webpdf]
 playwright
 ydata-profiling
+sweetviz
