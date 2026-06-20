@@ -11,7 +11,12 @@
                 "innoverio.vscode-dbt-power-user",
                 "ms-python.python",
                 "ms-ossdata.vscode-postgresql"
-            ]
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.venvPath": "",
+                "python.terminal.activateEnvironment": false
+            }
         }
     },
     "forwardPorts": [5432],
