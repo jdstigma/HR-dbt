@@ -8,3 +8,4 @@ seaborn
 scipy
 nbconvert[webpdf]
 playwright
+ydata-profiling
